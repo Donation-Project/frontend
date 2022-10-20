@@ -21,6 +21,7 @@ export default function BarApp() {
             </Typography>
             <Stack spacing={2} direction="row">
               <Button style={{ backgroundColor: 'white', color: 'black' }}>PAGE</Button>
+              <Button style={{ backgroundColor: 'white', color: 'black' }}>MYPAGE</Button>
               <Button style={{ backgroundColor: 'white', color: 'black' }} onClick={() => {
                 navigate("/post-LoginPage");
               }}>LOGIN</Button>
