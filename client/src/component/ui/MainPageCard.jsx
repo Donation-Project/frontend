@@ -21,7 +21,7 @@ export default function MainPageCard() {
             <Grid sx={{ minWidth: '90%', maxWidth: '90%' }} >
                 <Grid container spacing={2}>
                     <Grid item xs={8}>
-                        <Card style={{ height: '46vw' }}>
+                        <Card style={{ height: '100%' }}>
                             <CardMedia
                                 component="img"
                                 image={image1}
@@ -39,7 +39,7 @@ export default function MainPageCard() {
                         </Card>
                     </Grid>
                     <Grid item xs={4}>
-                        <Card style={{ height: '46vw' }}>
+                    <Card style={{ height: '100%' }}>
                             <CardMedia
                                 component="img"
                                 image={image3}
@@ -49,11 +49,11 @@ export default function MainPageCard() {
                                     블록체인을 활용한 후원시스템
                                 </Typography><br />
                                 <Typography variant="h5" color="text.secondary" >
-                                    이 사이트는 블록체인을 활용하여 투명성이 보장된 후원 사이트입니다<br /><br />
-                                    사용자들은 후원 기록, 후원금액, 후원금 사용내역등을 확인할 수 있으며<br /><br />
-                                    사용자의 후원 기록들은 블록체인 네트워크 상에 저장되어있으며 블록체인 <br /><br />
-                                    특성상 블록체인 네트워크에 저장되어 있는 기록은 누구도 변경혹은  <br /><br />
-                                    제거 할 수 없습니다.<br /><br />
+                                    이 사이트는 블록체인을 활용하여 투명성이 보장된 후원 사이트입니다.
+                                    사용자들은 후원 기록, 후원금액, 후원금 사용내역등을 확인할 수 있으며,
+                                    사용자의 후원 기록들은 블록체인 네트워크 상에 저장되어있으며 블록체인
+                                    특성상 블록체인 네트워크에 저장되어 있는 기록은 누구도 변경혹은 
+                                    제거 할 수 없습니다.
                                 </Typography>
                             </CardContent>
                         </Card>
