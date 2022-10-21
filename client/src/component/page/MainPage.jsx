@@ -1,15 +1,15 @@
 import * as React from 'react';
 import BarApp from '../ui/BarApp';
-import MainPage from '../ui/MainPage';
+import MainPageCard from '../ui/MainPageCard';
 //#region mui
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 //#endregion
 
 export default function MediaCard() {
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Grid sx={{ flexGrow: 1 }}>
             <BarApp></BarApp>
-            <MainPage></MainPage>
-        </Box>
+            <MainPageCard></MainPageCard>
+        </Grid>
     );
 }
