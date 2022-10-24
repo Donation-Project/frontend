@@ -4,21 +4,7 @@ import { useNavigate, useLocation } from "react-router";
 //#endregion
 
 //#region mui
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
+import { Box, Container, Paper, Button, Typography, Grid, TextField, FormControlLabel, Checkbox, Card, CardMedia, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 //#endregion
 
 //#region 이미지
@@ -37,7 +23,6 @@ export default function RegistrationPage() {
     const [contents, setContents] = useState("");
     const [price, setPrice] = useState();
     const [files, setFiles] = useState(image1);
-    const [docxfiles, DocxsetFiles] = useState("선택된 파일 없음");
     //#endregion
 
     //#region 이미지 인코딩
@@ -54,6 +39,9 @@ export default function RegistrationPage() {
     };
     //#endregion
 
+    useEffect(() => {
+        console.log(files)
+    }, [files])
     //#region 렌더링
     return (
         <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
@@ -95,7 +83,7 @@ export default function RegistrationPage() {
                                         setTitle(e.target.value)
                                     }}
                                 />
-                            </Grid>                            
+                            </Grid>
                             <Grid item xs={12}>
                                 <TextField
                                     required
@@ -125,7 +113,7 @@ export default function RegistrationPage() {
                                     sx={{ height: '100%', display: 'flex' }}
                                 >
                                     <CardMedia
-                                        component="img"                                        
+                                        component="img"
                                         image={files}
                                         alt="random"
                                     />

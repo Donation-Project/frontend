@@ -1,5 +1,5 @@
 //#region react
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 //#endregion
 
@@ -11,8 +11,7 @@ export default function BarApp(props) {
 
   const navigate = useNavigate();
 
-  console.log(name)
-  function LoginButton() {
+  function LoginConfirmation() {
     if (name != null) {
       return (
           <Button style={{ backgroundColor: 'white', color: 'black' }} onClick={() => {
@@ -42,7 +41,7 @@ export default function BarApp(props) {
             <Stack spacing={2} direction="row">
               <Button style={{ backgroundColor: 'white', color: 'black' }}>PAGE</Button>
               <Button style={{ backgroundColor: 'white', color: 'black' }}>MYPAGE</Button>
-              {LoginButton()}
+              {LoginConfirmation()}
             </Stack>
           </Toolbar>
         </AppBar>

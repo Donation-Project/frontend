@@ -1,17 +1,30 @@
 //#region react
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 //#endregion
 
-import { Button, Card, Typography, CardActions, CardMedia, CardContent, Grid, Box } from '@mui/material';
+import { Button, Card, Typography, CardActions, CardMedia, CardContent, Grid } from '@mui/material';
 
 //#region image
 import image1 from "../image/후원목록이미지.png";
 import image2 from "../image/후원등록이미지.jpg";
 import image3 from "../image/블록체인.png";
 //#endregion
-export default function MainPageCard() {
+export default function MainPageCard(props) {
+
+    const { name } = props;
+
     const navigate = useNavigate();
+
+    function LoginConfirmation(){
+        if(name != null){
+            navigate("/post-RegistrationPage");
+        }else{
+            alert("로그인이 필요한 작업입니다.");
+            navigate("/post-LoginPage");
+        }
+    }
+
     return (
         <Grid container
             mt={2}
@@ -71,7 +84,7 @@ export default function MainPageCard() {
                             </CardContent>
                             <CardActions>
                                 <Button size="small" onClick={() => {
-                                    navigate("/post-RegistrationPage");
+                                    LoginConfirmation()                                    
                                 }}><Typography variant="h5">
                                         후원등록
                                     </Typography></Button>
