@@ -1,11 +1,13 @@
 //#region react
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 //#endregion
 
 //#region mui
-import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from '@mui/material';
+import { IconButton, Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import HomeIcon from '@mui/icons-material/Home';
 //#endregion
 
 
@@ -15,8 +17,30 @@ export default function LoginPage() {
     //#region useState 변수
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
+    const BASEURL = "http://43.201.100.161:8080/"
     //#endregion
 
+    //#region 서버연결
+    const instance = axios.create({
+        baseURL: BASEURL
+    });
+    //#endregion
+
+    //#region 로그인
+    async function Login() {
+        await instance.post('/api/login', {
+            email: id, password: pw
+        }).then(function (response) {
+            if (response.data.success) {
+                alert("로그인 성공")
+                navigate("/", { state: id });
+            }
+        }).catch(function (error) {
+            alert(`${error.response.data.error.errorMessage}`);
+            window.location.replace("post-LoginPage")
+        });
+    }
+    //#endregion
     //#region 렌더링
     return (
         <Container component="main" maxWidth="xs">
@@ -42,7 +66,7 @@ export default function LoginPage() {
                         margin="normal"
                         required
                         fullWidth
-                        label="ID"
+                        label="Email_ID"
                         autoFocus
                         onChange={(e) => setId(e.target.value)}
                     />
@@ -65,10 +89,21 @@ export default function LoginPage() {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                         onClick={async () => {
-
+                            Login()
                         }}
                     >
                         로그인
+                    </Button>
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mb: 5 }}
+                        onClick={async () => {
+                            navigate("/")
+                        }}
+                    >
+                        메인페이지
                     </Button>
                     <Grid container>
                         <Grid item xs>

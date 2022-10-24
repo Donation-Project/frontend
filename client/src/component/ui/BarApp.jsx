@@ -5,8 +5,28 @@ import { useNavigate } from "react-router-dom";
 
 import { Button, Card, Typography, Toolbar, Grid, AppBar, Stack } from '@mui/material';
 
-export default function BarApp() {
+export default function BarApp(props) {
+
+  const { name } = props;
+
   const navigate = useNavigate();
+
+  console.log(name)
+  function LoginButton() {
+    if (name != null) {
+      return (
+          <Button style={{ backgroundColor: 'white', color: 'black' }} onClick={() => {
+            navigate("/post-LoginPage");
+          }}>LOGOUT</Button>
+      )
+    } else {
+      return (
+        <Button style={{ backgroundColor: 'white', color: 'black' }} onClick={() => {
+          navigate("/post-LoginPage");
+        }}>LOGIN</Button>
+      )
+    }
+  }
   return (
     <Grid container
       mt={3}
@@ -22,9 +42,7 @@ export default function BarApp() {
             <Stack spacing={2} direction="row">
               <Button style={{ backgroundColor: 'white', color: 'black' }}>PAGE</Button>
               <Button style={{ backgroundColor: 'white', color: 'black' }}>MYPAGE</Button>
-              <Button style={{ backgroundColor: 'white', color: 'black' }} onClick={() => {
-                navigate("/post-LoginPage");
-              }}>LOGIN</Button>
+              {LoginButton()}
             </Stack>
           </Toolbar>
         </AppBar>
