@@ -1,27 +1,42 @@
 //#region react
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-//#endregion
-//#region mui
-import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, Container } from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import axios from 'axios';
 //#endregion
 
+//#region mui
+import { Alert, Avatar, Button, CssBaseline, TextField, FormControlLabel, Stack, Link, Grid, Box, Typography, Container } from '@mui/material';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+//#endregion
 
 export default function NewMemberPage() {
 
     const navigate = useNavigate();
 
     //#region useState    
-    const [email, setEmail] = useState("");
-    const [name, setName] = useState("");
-    const [pw, setPw] = useState("");
+    const [useremail, setUseremail] = useState("");
+    const [username, setUsername] = useState("");
+    const [userpassword, setUserpassword] = useState("");
     const [MetaMaskAcc, setMetaMaskAcc] = useState("");
+    const BASEURL = "http://43.201.100.161:8080/"
     //#endregion
+    const instance = axios.create({
+        baseURL: BASEURL
+    });
 
     //#region 회원가입 버튼(이벤트)
-    function Sign_up() {
-        navigate("/post-LoginPage");
+    async function Sign_up() {
+        await instance.post('/api/join', {
+            email: useremail, name: username, password: userpassword
+        }).then(function (response) {
+            if(response.data.success){
+                alert("회원가입 성공")
+                navigate("/post-LoginPage")
+            }            
+        }).catch(function (error) {
+            alert(`${error.response.data.error.errorMessage}`);
+            window.location.replace("post-NewMemberPage")
+        });
     }
     //#endregion
 
@@ -54,10 +69,10 @@ export default function NewMemberPage() {
                                 id="name"
                                 label="이름"
                                 autoFocus
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e) => setUsername(e.target.value)}
                             />
                         </Grid>
-                        <Grid item xs={12} sm={8}>
+                        <Grid item xs={12}>
                             <TextField
                                 required
                                 fullWidth
@@ -66,7 +81,7 @@ export default function NewMemberPage() {
                                 type="email"
                                 id="email"
                                 autoComplete="new-id"
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={(e) => setUseremail(e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -78,7 +93,7 @@ export default function NewMemberPage() {
                                 type="password"
                                 id="password"
                                 autoComplete="new-password"
-                                onChange={(e) => setPw(e.target.value)}
+                                onChange={(e) => setUserpassword(e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12}>

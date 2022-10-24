@@ -50,8 +50,8 @@ export default function MainPageCard() {
                                 </Typography><br />
                                 <Typography variant="h5" color="text.secondary" >
                                     이 사이트는 블록체인을 활용하여 투명성이 보장된 후원 사이트입니다.
-                                    사용자들은 후원 기록, 후원금액, 후원금 사용내역등을 확인할 수 있으며,
-                                    사용자의 후원 기록들은 블록체인 네트워크 상에 저장되어있으며 블록체인
+                                    사용자들은 후원 기록, 후원금액, 후원금 사용내역등을 확인할 수 있습니다.
+                                    후원 기록들은 블록체인 네트워크 상에 저장되어있으며 블록체인
                                     특성상 블록체인 네트워크에 저장되어 있는 기록은 누구도 변경혹은 
                                     제거 할 수 없습니다.
                                 </Typography>
@@ -81,7 +81,7 @@ export default function MainPageCard() {
                     <Grid item xs={8}>
                         <Typography>공백 (나중에 체워놓을거)</Typography>
                     </Grid>
-                </Grid>
+                </Grid>&nbsp;
             </Grid>
         </Grid>
     );

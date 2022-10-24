@@ -33,7 +33,8 @@ export default function RegistrationPage() {
     //#region uesState 변수
 
     const [requestitem, setRequestitem] = useState("");
-    const [address, setAddress] = useState("");
+    const [title, setTitle] = useState("");
+    const [contents, setContents] = useState("");
     const [price, setPrice] = useState();
     const [files, setFiles] = useState(image1);
     const [docxfiles, DocxsetFiles] = useState("선택된 파일 없음");
@@ -86,12 +87,24 @@ export default function RegistrationPage() {
                             <Grid item xs={12}>
                                 <TextField
                                     required
-                                    id="houseAddress"
-                                    label="집주소"
+                                    id="title"
+                                    label="제목"
                                     fullWidth
                                     variant="standard"
                                     onChange={(e) => {
-                                        setAddress(e.target.value)
+                                        setTitle(e.target.value)
+                                    }}
+                                />
+                            </Grid>                            
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    id="Contents"
+                                    label="내용"
+                                    fullWidth
+                                    variant="standard"
+                                    onChange={(e) => {
+                                        setContents(e.target.value)
                                     }}
                                 />
                             </Grid>
@@ -106,21 +119,6 @@ export default function RegistrationPage() {
                                         setPrice(e.target.value)
                                     }}
                                 />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    label="File" value={docxfiles}
-                                    InputProps={{
-                                        readOnly: true,
-                                    }}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Button variant="contained" component="label">
-                                    문서올리기
-                                    <input hidden accept="." multiple type="file"
-                                    />
-                                </Button>&nbsp;
                             </Grid>
                             <Grid item xs={12} >
                                 <Card
