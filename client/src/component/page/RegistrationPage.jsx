@@ -1,6 +1,7 @@
 //#region react
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router";
+import axios from 'axios';
 //#endregion
 
 //#region mui
@@ -23,7 +24,12 @@ export default function RegistrationPage() {
     const [contents, setContents] = useState("");
     const [price, setPrice] = useState();
     const [files, setFiles] = useState(image1);
+    const BASEURL = process.env.REACT_APP_APIURL
     //#endregion
+
+    const instance = axios.create({
+        baseURL: BASEURL
+    });
 
     //#region 이미지 인코딩
     const encodeFileToBase64 = (fileBlob) => {

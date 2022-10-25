@@ -18,7 +18,7 @@ export default function NewMemberPage() {
     const [username, setUsername] = useState("");
     const [userpassword, setUserpassword] = useState("");
     const [MetaMaskAcc, setMetaMaskAcc] = useState("");
-    const BASEURL = "http://43.201.100.161:8080/"
+    const BASEURL = process.env.REACT_APP_APIURL
     //#endregion
     const instance = axios.create({
         baseURL: BASEURL

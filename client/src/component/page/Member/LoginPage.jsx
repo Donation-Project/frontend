@@ -16,7 +16,7 @@ export default function LoginPage() {
     //#region useState 변수
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
-    const BASEURL = "http://43.201.100.161:8080/"
+    const BASEURL = process.env.REACT_APP_APIURL
     //#endregion
 
     //#region 서버연결
