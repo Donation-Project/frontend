@@ -117,7 +117,7 @@ const Sidebar = () => {
             />
             <Item
               title="관심있는 게시물"
-              to="/mypage/post"
+              to="/mypage/favorite/post"
               icon={<FavoriteIcon />}
               selected={selected}
               setSelected={setSelected}
