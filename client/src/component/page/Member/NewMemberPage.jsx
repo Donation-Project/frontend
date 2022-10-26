@@ -27,12 +27,12 @@ export default function NewMemberPage() {
     //#region 회원가입 버튼(이벤트)
     async function Sign_up() {
         await instance.post('/api/join', {
-            email: useremail, name: username, password: userpassword
+            email: useremail, name: username, password: userpassword, metamask: MetaMaskAcc
         }).then(function (response) {
-            if(response.data.success){
+            if (response.data.success) {
                 alert("회원가입 성공")
                 navigate("/post-LoginPage")
-            }            
+            }
         }).catch(function (error) {
             alert(`${error.response.data.error.errorMessage}`);
             window.location.replace("post-NewMemberPage")
@@ -55,7 +55,7 @@ export default function NewMemberPage() {
                 <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">
+                <Typography sx={{ fontSize: 25 }}>
                     회원가입
                 </Typography>
                 <Box component="form" noValidate sx={{ mt: 3 }}>
@@ -112,7 +112,7 @@ export default function NewMemberPage() {
                         type="button"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mt: 3, mb: 2, fontSize: 14 }}
                         onClick={() => {
                             Sign_up();
                         }}
@@ -121,7 +121,7 @@ export default function NewMemberPage() {
                     </Button>
                     <Grid container justifyContent="flex-end">
                         <Grid item>
-                            <Link onClick={() => {
+                            <Link sx={{ fontSize: 15 }} onClick={() => {
                                 navigate("/post-LoginPage");
                             }} variant="body2">
                                 이미 아이디가 있는 경우

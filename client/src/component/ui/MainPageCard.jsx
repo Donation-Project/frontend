@@ -12,14 +12,14 @@ import image3 from "../image/블록체인.png";
 //#endregion
 export default function MainPageCard(props) {
 
-    const { name } = props;
+    const { id } = props;
 
     const navigate = useNavigate();
 
-    function LoginConfirmation(){
-        if(name != null){
-            navigate("/post-RegistrationPage");
-        }else{
+    function LoginConfirmation() {
+        if (id != null) {
+            navigate("/post-RegistrationPage", { state: id });
+        } else {
             alert("로그인이 필요한 작업입니다.");
             navigate("/post-LoginPage");
         }
@@ -45,14 +45,16 @@ export default function MainPageCard(props) {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small"><Typography variant="h5">
+                                <Button size="small"><Typography variant="h5" onClick={() => {
+                                    navigate("/post-SponsorshipListPage", { state: id });
+                                }}>
                                     후원목록 보기러가기
                                 </Typography></Button>
                             </CardActions>
                         </Card>
                     </Grid>
                     <Grid item xs={4}>
-                    <Card style={{ height: '100%' }}>
+                        <Card style={{ height: '100%' }}>
                             <CardMedia
                                 component="img"
                                 image={image3}
@@ -65,7 +67,7 @@ export default function MainPageCard(props) {
                                     이 사이트는 블록체인을 활용하여 투명성이 보장된 후원 사이트입니다.
                                     사용자들은 후원 기록, 후원금액, 후원금 사용내역등을 확인할 수 있습니다.
                                     후원 기록들은 블록체인 네트워크 상에 저장되어있으며 블록체인
-                                    특성상 블록체인 네트워크에 저장되어 있는 기록은 누구도 변경혹은 
+                                    특성상 블록체인 네트워크에 저장되어 있는 기록은 누구도 변경혹은
                                     제거 할 수 없습니다.
                                 </Typography>
                             </CardContent>
@@ -84,7 +86,7 @@ export default function MainPageCard(props) {
                             </CardContent>
                             <CardActions>
                                 <Button size="small" onClick={() => {
-                                    LoginConfirmation()                                    
+                                    LoginConfirmation()
                                 }}><Typography variant="h5">
                                         후원등록
                                     </Typography></Button>

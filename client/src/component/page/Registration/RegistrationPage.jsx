@@ -1,5 +1,5 @@
 //#region react
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from "react-router";
 import axios from 'axios';
 //#endregion
@@ -9,7 +9,7 @@ import { Box, Container, Paper, Button, Typography, Grid, TextField, FormControl
 //#endregion
 
 //#region 이미지
-import image1 from "../image/후원목록이미지.png"
+import image1 from "../../image/후원목록이미지.png"
 //#endregion
 
 export default function RegistrationPage() {
@@ -20,11 +20,13 @@ export default function RegistrationPage() {
     //#region uesState 변수
 
     const [requestitem, setRequestitem] = useState("");
+    const [agree, setAgree] = useState(false);
     const [title, setTitle] = useState("");
     const [contents, setContents] = useState("");
     const [price, setPrice] = useState();
     const [files, setFiles] = useState(image1);
     const BASEURL = process.env.REACT_APP_APIURL
+    const [id] = useState(location.state);
     //#endregion
 
     const instance = axios.create({
@@ -45,9 +47,37 @@ export default function RegistrationPage() {
     };
     //#endregion
 
-    useEffect(() => {
-        console.log(files)
-    }, [files])
+    //#region 동의여부
+    function CheckBoxBool() {
+        if (agree === false) {
+            setAgree(true);
+        }
+        else if (agree === true) {
+            setAgree(false);
+        }
+    }
+    //#endregion
+
+    //#region 등록
+    function Registration() {
+        if (agree === false) {
+            alert("개인정보 열람 동의 항목에 체크해주세요")
+        } else if (agree === true) {
+            instance.post(`/api/post/${id}`, {
+                title: title, content: contents, amount: price, category: "ETC", image: files
+            }).then(function (response) {
+                if (response.data.success) {
+                    alert("등록 완료")
+                    navigate("/", { state: id })
+                }
+            }).catch(function (error) {
+                alert(`${error.response.data.error.errorMessage}`);
+                window.location.replace("post-RegistrationPage")
+            });
+        }
+    }
+    //#endregion
+
     //#region 렌더링
     return (
         <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
@@ -142,7 +172,7 @@ export default function RegistrationPage() {
                             </Grid>
                             <Grid item xs={12}>
                                 <FormControlLabel
-                                    control={<Checkbox color="secondary" />}
+                                    control={<Checkbox color="secondary" onClick={CheckBoxBool} />}
                                     label="개인 정보 열람 동의"
                                 />
                             </Grid>
@@ -153,7 +183,7 @@ export default function RegistrationPage() {
                             variant="contained"
                             sx={{ mt: 3, ml: 1 }}
                             onClick={() => {
-                                navigate('/');
+                                Registration();
                             }}
                         >등록
                         </Button>
@@ -161,7 +191,7 @@ export default function RegistrationPage() {
                             variant="contained"
                             sx={{ mt: 3, ml: 1 }}
                             onClick={() => {
-                                navigate('/');
+                                navigate('/', { state: id });
                             }}
                         >취소
                         </Button>

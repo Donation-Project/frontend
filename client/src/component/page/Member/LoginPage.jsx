@@ -32,7 +32,7 @@ export default function LoginPage() {
         }).then(function (response) {
             if (response.data.success) {
                 alert("로그인 성공")
-                navigate("/", { state: id });
+                navigate("/", { state: response.data.data });
             }
         }).catch(function (error) {
             alert(`${error.response.data.error.errorMessage}`);
@@ -55,13 +55,13 @@ export default function LoginPage() {
                 <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">
+                <Typography sx={{ fontSize: 25 }} >
                     로그인
                 </Typography>
                 <Box component="form" onSubmit={(e) => {
                     e.preventDefault();
                 }} noValidate sx={{ mt: 1 }}>
-                    <TextField
+                    <TextField                    
                         margin="normal"
                         required
                         fullWidth
@@ -86,7 +86,7 @@ export default function LoginPage() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mt: 3, mb: 2, fontSize:13 }}
                         onClick={async () => {
                             Login()
                         }}
@@ -97,7 +97,7 @@ export default function LoginPage() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mb: 5 }}
+                        sx={{ mb: 5, fontSize:13 }}
                         onClick={async () => {
                             navigate("/")
                         }}
@@ -106,12 +106,12 @@ export default function LoginPage() {
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link href="#" variant="body2">
+                            <Link sx={{ fontSize: 15 }} href="#" variant="body2">
                                 패스워드 찾기
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Link onClick={() => {
+                            <Link sx={{ fontSize: 15 }} onClick={() => {
                                 navigate("/post-NewMemberPage")
                             }} variant="body2">
                                 {"회원가입"}

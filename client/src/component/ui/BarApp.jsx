@@ -7,16 +7,16 @@ import { Button, Card, Typography, Toolbar, Grid, AppBar, Stack } from '@mui/mat
 
 export default function BarApp(props) {
 
-  const { name } = props;
+  const { id } = props;
 
   const navigate = useNavigate();
 
   function LoginConfirmation() {
-    if (name != null) {
+    if (id != null) {
       return (
-          <Button style={{ backgroundColor: 'white', color: 'black' }} onClick={() => {
-            navigate("/post-LoginPage");
-          }}>LOGOUT</Button>
+        <Button style={{ backgroundColor: 'white', color: 'black' }} onClick={() => {
+          navigate("/post-LoginPage");
+        }}>LOGOUT</Button>
       )
     } else {
       return (
@@ -39,7 +39,9 @@ export default function BarApp(props) {
               MENU
             </Typography>
             <Stack spacing={2} direction="row">
-              <Button style={{ backgroundColor: 'white', color: 'black' }}>PAGE</Button>
+              <Button style={{ backgroundColor: 'white', color: 'black' }} onClick={() => {
+                navigate("/", { state: id })
+              }}>MAIN</Button>
               <Button style={{ backgroundColor: 'white', color: 'black' }}>MYPAGE</Button>
               {LoginConfirmation()}
             </Stack>
