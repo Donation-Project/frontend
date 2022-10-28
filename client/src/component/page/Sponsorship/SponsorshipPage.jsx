@@ -11,12 +11,12 @@ export default function SponsorshipPage() {
     const location = useLocation();
 
     const [id] = useState(location.state[0]);
-    const [card] = useState(location.state[1]);
+    const [postId] = useState(location.state[1]);    
 
     return (
         <Grid sx={{ flexGrow: 1 }}>
             <BarApp id={id}></BarApp>
-            <SponsorshipCard card={card}></SponsorshipCard>
+            <SponsorshipCard postId={postId} id={id}></SponsorshipCard>
         </Grid>
     );
 }

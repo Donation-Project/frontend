@@ -13,7 +13,7 @@ export default function MediaCard() {
 
     return (
         <Grid sx={{ flexGrow: 1 }}>
-            <BarApp id={id}></BarApp>
+            <BarApp id={id}></BarApp>            
             <MainPageCard id={id}></MainPageCard>
         </Grid>
     );
