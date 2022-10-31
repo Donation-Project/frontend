@@ -12,6 +12,7 @@ import NewMemberPage from "./component/page/Member/NewMemberPage";
 import RegistrationPage from "./component/page/Registration/RegistrationPage";
 import SponsorshipListPage from "./component/page/Sponsorship/SponsorshipListPage";
 import SponsorshipPage from "./component/page/Sponsorship/SponsorshipPage";
+import DonationPage from "./component/page/Donation/DonationPage";
 function App(props) {
     return (
         <BrowserRouter>
@@ -22,6 +23,7 @@ function App(props) {
                 <Route path="post-RegistrationPage" element={<RegistrationPage />} />
                 <Route path="post-SponsorshipListPage" element={<SponsorshipListPage />} />
                 <Route path="post-SponsorshipPage" element={<SponsorshipPage />} />
+                <Route path="post-DonationPage" element={<DonationPage />} />
             </Routes>
         </BrowserRouter>
     );
