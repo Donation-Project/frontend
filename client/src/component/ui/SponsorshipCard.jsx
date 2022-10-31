@@ -5,10 +5,19 @@ import { useNavigate } from "react-router-dom";
 
 //#region mui
 import { Link, Avatar, Grid, Card, CardHeader, CardMedia, CardContent, Typography, CardActions } from '@mui/material';
+import TransactionCard from './TransactionCard';
 //#endregion
 
 //#region 라이브러리
+import Donation from "../../contracts/Donation.json"
+import Web3 from 'web3';
 import axios from 'axios';
+//#endregion
+
+//#region 전역변수
+let web3;
+let web3instance;
+let donation = Donation;
 //#endregion
 
 export default function SponsorshipCard(props) {
@@ -26,8 +35,8 @@ export default function SponsorshipCard(props) {
     const [title, setTitle] = useState();
     const [category, setCategory] = useState();
     const [content, setContent] = useState();
-    const [card, setCard] = useState();    
-
+    const [card, setCard] = useState();
+    const [transactions, setTransactions] = useState([]);
     //#region 서버연결
     useEffect(() => {
         const BASEURL = process.env.REACT_APP_APIURL
@@ -51,6 +60,18 @@ export default function SponsorshipCard(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     //#endregion    
+
+    useEffect(() => {
+        async function load() {
+            web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
+            const networkId = await web3.eth.net.getId();
+            const deployedNetwork = donation.networks[networkId];
+            web3instance = new web3.eth.Contract(donation.abi, deployedNetwork.address);
+            setTransactions(await web3instance.methods.getChracterMapping(postId).call());
+        }
+        load();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <Grid container
@@ -95,11 +116,14 @@ export default function SponsorshipCard(props) {
                         &nbsp;
                     </Grid>
                     &nbsp;
+                    <CardContent>
+                        <TransactionCard transactions={transactions}></TransactionCard>
+                    </CardContent>
                     <CardActions>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
                                 <Link sx={{ fontSize: 20 }} onClick={() => {
-                                    navigate("/post-DonationPage", {state:[card, id]})
+                                    navigate("/post-DonationPage", { state: [card, id] })
                                 }} variant="body2">
                                     후원하러 가기
                                 </Link>

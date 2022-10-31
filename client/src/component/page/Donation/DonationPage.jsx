@@ -30,6 +30,7 @@ export default function DonationPage() {
     const [Sender, setSender] = useState();
     const [accounts, setAccounts] = useState("");
     const [donationprice, setDonationPrice] = useState();
+    const [postId] = useState(location.state[0].postId);
     const [RecipientAddress] = useState(location.state[0].userRespDto.metamask)
     const [Recipient] = useState(location.state[0].userRespDto.name)
     const [RecipientEmail] = useState(location.state[0].userRespDto.email)
@@ -73,10 +74,12 @@ export default function DonationPage() {
                 alert("후원금액을 초과했습니다")
             } else {
                 try {
-                    await web3instance.methods.getDonation(RecipientAddress, Sender, Recipient, donationprice).send({
+                    await web3instance.methods.getDonation(postId, RecipientAddress, Sender, Recipient, donationprice).send({
                         from: accounts[0],
                         value: web3.utils.toWei(donationprice, "ether"),    //wei
                         gas: 900000,
+                    }).then(function (response) {
+                        navigate("/", { state: id })
                     })
                 }
                 catch (e) {
